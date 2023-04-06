@@ -1,26 +1,11 @@
-use std::env;
+pub mod services;
 
 use actix_web::{
     get, http::header::ContentType, post, web, App, HttpResponse, HttpServer, Responder,
 };
 use log::info;
-use serde::Serialize;
-
-#[derive(Debug, Serialize)]
-struct SimpleMsgReturn {
-    msg: String,
-}
-
-#[get("/healthcheck")]
-async fn healthcheck() -> impl Responder {
-    let response = SimpleMsgReturn {
-        msg: "I'm alive!".to_string(),
-    };
-
-    HttpResponse::Ok()
-        .content_type(ContentType::json())
-        .json(response)
-}
+use services::healthcheck::healthcheck;
+use std::env;
 
 #[post("/echo")]
 async fn echo(req_body: String) -> impl Responder {
