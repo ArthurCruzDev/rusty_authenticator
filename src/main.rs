@@ -1,8 +1,6 @@
 pub mod services;
 
-use actix_web::{
-    get, http::header::ContentType, post, web, App, HttpResponse, HttpServer, Responder,
-};
+use actix_web::{post, web, App, HttpResponse, HttpServer, Responder};
 use log::info;
 use services::healthcheck::healthcheck;
 use std::env;
